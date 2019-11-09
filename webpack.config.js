@@ -1,4 +1,6 @@
 const path = require('path')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 const commonConfig = {
   node: {
@@ -52,32 +54,31 @@ const commonConfig = {
   }
 }
 
-const HtmlWebpackPlugin = require('html-webpack-plugin')
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+
 module.exports = [
   Object.assign(
     {
       target: 'electron-main',
       entry: { main: './src/main.ts' },
-	  plugins: [
-      new CleanWebpackPlugin(),
-      new HtmlWebpackPlugin({
-        hash: true,
-        filename: 'index.html',
-        title: 'NosCoreLegend',
-      })]
+      plugins: [
+        this.mode === 'production' ? new CleanWebpackPlugin(): false,
+        new HtmlWebpackPlugin({
+          hash: true,
+          filename: 'index.html',
+          title: 'NosCoreLegend',
+        })].filter(Boolean)
     },
     commonConfig),
+
   Object.assign(
     {
       target: 'electron-renderer',
       entry: { gui: './src/gui.tsx' },
       plugins: [
         new HtmlWebpackPlugin({
-          hash: true,
           filename: 'index.html',
           title: 'NosCoreLegend',
         })]
     },
-    commonConfig),
-]
+    commonConfig)
+];
