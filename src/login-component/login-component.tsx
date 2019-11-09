@@ -4,14 +4,16 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
 import './login-component.css';
+import { AuthInformation, AuthClient } from '../auth/auth-client';
 
-interface LoginComponentProps {
-
-}
 
 interface LoginComponentState {
     showMenu: boolean;
     userName: string;
+}
+
+export interface LoginComponentProps {
+    authCallBack: (state: AuthInformation) => void;
 }
 
 export class LoginComponent extends React.Component<LoginComponentProps, LoginComponentState> {
@@ -27,9 +29,6 @@ export class LoginComponent extends React.Component<LoginComponentProps, LoginCo
         this.closeMenu = this.closeMenu.bind(this);
     }
 
-    emailInput: any;
-    password: any;
-
     showMenu = (event: React.MouseEvent) => {
         event.preventDefault();
 
@@ -37,12 +36,21 @@ export class LoginComponent extends React.Component<LoginComponentProps, LoginCo
     }
 
     closeMenu() {
-        this.setState({ showMenu: false, userName: this.state.userName });
+        this.setState({ showMenu: false, userName: this.state.userName, });
     }
 
-    login= (event: React.MouseEvent) => {
+    login = async (event: any) => {
         event.preventDefault();
-        this.setState({ showMenu: false, userName:'0Lucifer0' });
+        let password = (document.getElementById('password') as HTMLInputElement).value;
+        let email = (document.getElementById('email') as HTMLInputElement).value;
+        if (email && password) {
+            let authclient = new AuthClient(email, password, 'fr-FR', 'localhost', '/api/v1/auth/thin', 5000);
+            let authInfo = await authclient.getSessionToken() as AuthInformation;
+            if (authInfo) {
+                this.props.authCallBack(authInfo);
+                this.setState({ showMenu: false, userName: email });
+            }
+        }
     }
 
     render() {
@@ -58,20 +66,19 @@ export class LoginComponent extends React.Component<LoginComponentProps, LoginCo
                         <Modal.Title>Login</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                        <Form>
-                            <Form.Group controlId='formGroupEmail'>
+                        <Form onSubmit={this.login}>
+                            <Form.Group>
                                 <Form.Label>Login/Email address</Form.Label>
-                                <Form.Control ref={this.emailInput} type='email' placeholder='Enter Login/Email' />
+                                <Form.Control id='email' type='text' placeholder='Enter Login/Email' required />
                             </Form.Group>
-                            <Form.Group controlId='formGroupPassword'>
+                            <Form.Group>
                                 <Form.Label>Password</Form.Label>
-                                <Form.Control ref={this.password} type='password' placeholder='Password' />
+                                <Form.Control id='password' type='password' placeholder='Password' required />
                             </Form.Group>
-                        </Form>
-
-                        <Button variant='primary' className='loginButton' onClick={this.login}>
-                            Log In
+                            <Button variant='primary' className='loginButton' type='submit'>
+                                Log In
                         </Button>
+                        </Form>
                     </Modal.Body>
                 </Modal>
 

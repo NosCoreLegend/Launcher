@@ -1,7 +1,8 @@
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-
+const HtmlWebpackHotPlugin = require('html-webpack-hot-plugin')
+const htmlHotPlugin = new HtmlWebpackHotPlugin({ hot: true });
 const commonConfig = {
   node: {
     __dirname: false
@@ -11,7 +12,10 @@ const commonConfig = {
     filename: '[name].js'
   },
   devServer: {
-    writeToDisk: true
+    writeToDisk: true,
+    before(app, server) {
+      htmlHotPlugin.setDevServer(server)
+    }
   },
   module: {
     rules: [
@@ -61,7 +65,7 @@ module.exports = [
   Object.assign(
     {
       target: 'electron-main',
-      entry: { main: './src/main.ts'}
+      entry: { main: './src/main.ts' }
     },
     commonConfig),
 
@@ -70,12 +74,13 @@ module.exports = [
       target: 'electron-renderer',
       entry: { gui: './src/gui.tsx' },
       plugins: [
-        this.mode === 'production' ? new CleanWebpackPlugin(): false,
+        this.mode === 'production' ? new CleanWebpackPlugin() : false,
         new HtmlWebpackPlugin({
           hash: true,
           filename: 'index.html',
           title: 'NosCoreLegend',
-        })].filter(Boolean)
+        }),
+        htmlHotPlugin].filter(Boolean)
     },
     commonConfig)
 ];
