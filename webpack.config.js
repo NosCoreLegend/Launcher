@@ -1,14 +1,14 @@
 const path = require('path')
 
 const commonConfig = {
-	node: {
+  node: {
     __dirname: false
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: '[name].js'
   },
-  
+
   module: {
     rules: [
       {
@@ -24,7 +24,7 @@ const commonConfig = {
         test: /\.tsx?$/,
         loader: ['babel-loader', 'ts-loader']
       },
-	  {
+      {
         test: /\.js$/,
         enforce: 'pre',
         loader: 'standard-loader',
@@ -38,8 +38,8 @@ const commonConfig = {
         loader: ['babel-loader']
       },
       {
-        test:/\.css$/,
-        use:['style-loader','css-loader']
+        test: /\.css$/,
+        use: ['style-loader', 'css-loader']
       },
       {
         test: /\.(png|jpe?g|gif|svg|woff2?|eot|ttf|otf)(\?.*)?$/,
@@ -53,11 +53,19 @@ const commonConfig = {
 }
 
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 module.exports = [
   Object.assign(
     {
       target: 'electron-main',
-      entry: { main: './src/main.ts' }
+      entry: { main: './src/main.ts' },
+	  plugins: [
+      new CleanWebpackPlugin(),
+      new HtmlWebpackPlugin({
+        hash: true,
+        filename: 'index.html',
+        title: 'NosCoreLegend',
+      })]
     },
     commonConfig),
   Object.assign(
@@ -65,11 +73,10 @@ module.exports = [
       target: 'electron-renderer',
       entry: { gui: './src/gui.tsx' },
       plugins: [
-	  new CleanWebpackPlugin(['dist']),
-	  new HtmlWebpackPlugin({
-            hash: true,
-            filename: 'index.html',
-			title: 'NosCoreLegend',
+        new HtmlWebpackPlugin({
+          hash: true,
+          filename: 'index.html',
+          title: 'NosCoreLegend',
         })]
     },
     commonConfig),
