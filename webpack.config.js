@@ -10,7 +10,9 @@ const commonConfig = {
     path: path.resolve(__dirname, 'dist'),
     filename: '[name].js'
   },
-
+  devServer: {
+    writeToDisk: true
+  },
   module: {
     rules: [
       {
@@ -59,14 +61,7 @@ module.exports = [
   Object.assign(
     {
       target: 'electron-main',
-      entry: { main: './src/main.ts' },
-      plugins: [
-        this.mode === 'production' ? new CleanWebpackPlugin(): false,
-        new HtmlWebpackPlugin({
-          hash: true,
-          filename: 'index.html',
-          title: 'NosCoreLegend',
-        })].filter(Boolean)
+      entry: { main: './src/main.ts'}
     },
     commonConfig),
 
@@ -75,10 +70,12 @@ module.exports = [
       target: 'electron-renderer',
       entry: { gui: './src/gui.tsx' },
       plugins: [
+        this.mode === 'production' ? new CleanWebpackPlugin(): false,
         new HtmlWebpackPlugin({
+          hash: true,
           filename: 'index.html',
           title: 'NosCoreLegend',
-        })]
+        })].filter(Boolean)
     },
     commonConfig)
 ];
