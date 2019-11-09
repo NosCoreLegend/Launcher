@@ -6,9 +6,9 @@
   "description": "Launcher for NosCoreLegend",
   "license": "MIT",
   "scripts": {
-    "build": "webpack --mode=production --config webpack.config.js && electron-builder build",
+    "build": "webpack --mode production --config webpack.config.js && electron-builder build",
     "release": "electron-builder build",
-    "start": "concurrently \"webpack-dev-server --mode=development --hot --inline --config webpack.config.js\" \"wait-on http://localhost:8080/ && electron ./dist/main.js\""
+    "start": "concurrently \"webpack-dev-server --mode development --hot --inline --config webpack.config.js\" \"wait-on http://localhost:8080/ && electron ./dist/main.js\""
   },
   "build": {
     "appId": "com.noscorelegend.launcher",

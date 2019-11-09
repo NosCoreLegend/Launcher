@@ -2,8 +2,16 @@ const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const HtmlWebpackHotPlugin = require('html-webpack-hot-plugin')
-const htmlHotPlugin = new HtmlWebpackHotPlugin({ hot: true });
+let htmlHotPlugin = new HtmlWebpackHotPlugin({ hot: true });
+
+let mode = process.argv[process.argv.indexOf('--mode') + 1];
+console.log(`webpack mode is ${process.argv[process.argv.indexOf('--mode') + 1]}`)
+if (mode === 'development') {
+  htmlHotPlugin = new HtmlWebpackHotPlugin({ hot: true });
+}
 const commonConfig = {
+  mode: mode,
+  devtool:  mode === 'production' ? "" : "source-map",
   node: {
     __dirname: false
   },
@@ -14,7 +22,9 @@ const commonConfig = {
   devServer: {
     writeToDisk: true,
     before(app, server) {
-      htmlHotPlugin.setDevServer(server)
+      if(mode === 'development') {
+        htmlHotPlugin.setDevServer(server)
+      }
     }
   },
   module: {
@@ -65,7 +75,10 @@ module.exports = [
   Object.assign(
     {
       target: 'electron-main',
-      entry: { main: './src/main.ts' }
+      entry: { main: './src/main.ts' },
+      plugins: [
+        mode === 'production' ? new CleanWebpackPlugin() : false,
+      ].filter(Boolean)
     },
     commonConfig),
 
@@ -74,13 +87,12 @@ module.exports = [
       target: 'electron-renderer',
       entry: { gui: './src/gui.tsx' },
       plugins: [
-        this.mode === 'production' ? new CleanWebpackPlugin() : false,
         new HtmlWebpackPlugin({
           hash: true,
           filename: 'index.html',
           title: 'NosCoreLegend',
         }),
-        htmlHotPlugin].filter(Boolean)
+        mode === 'development' ? htmlHotPlugin : false].filter(Boolean)
     },
     commonConfig)
 ];
