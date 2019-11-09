@@ -56,19 +56,19 @@ export class MenuBar extends React.Component {
 
   render() {
     return (
-            <Fragment>
-                <nav className='menu' role='navigation'>
-                    <ul>
-                       <li><LoginComponent /></li>
-                        <li className='closeLogo'>
-                            <FaTimes onClick={this.handleClose} />
-                        </li>
-                        <li className='optionLogo'>
-                            <FaCog />
-                        </li>
-                    </ul>
-                </nav>
-            </Fragment>
+      <Fragment>
+        <nav className='menu' role='navigation'>
+          <ul>
+            <li><LoginComponent /></li>
+            <li className='closeLogo'>
+              <FaTimes onClick={this.handleClose} />
+            </li>
+            <li className='optionLogo'>
+              <FaCog />
+            </li>
+          </ul>
+        </nav>
+      </Fragment>
     );
   }
 }

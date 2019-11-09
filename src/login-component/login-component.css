@@ -1,0 +1,40 @@
+.menu ul li{
+  display: inline-block;
+}
+
+.loginLogo {
+  -webkit-app-region: no-drag;
+  font-size: 35px;
+  color:grey;
+  margin-right:5px;
+  text-align: center;
+  display:inline-block;
+}
+
+.loginLogo:hover, .loginLogo:hover {
+  color: darkgrey;
+}
+
+.userId {
+  display:inline;
+}
+
+.login {
+  display:inline-block;
+  width:160px;
+  margin-top:10px;
+}
+
+.loginMenu {
+  background-image: url("../background2.jpg");
+  background-position: center top;
+  background-repeat: no-repeat;
+  background-size: 120%;
+  width:960px;
+  height:680px;
+  overflow: hidden;
+}
+
+.loginButton {
+  width:100%;
+}

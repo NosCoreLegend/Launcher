@@ -12,14 +12,6 @@
   list-style-type: none;
 }
 
-.loginLogo {
-  -webkit-app-region: no-drag;
-  font-size: 35px;
-  color:grey;
-  margin-right:5px;
-  text-align: center;
-}
-
 .optionLogo {
   -webkit-app-region: no-drag;
   font-size: 35px;
