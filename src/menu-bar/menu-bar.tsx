@@ -1,8 +1,9 @@
 import React, { Fragment } from 'react';
-import { FaUserCircle, FaCog, FaTimes } from 'react-icons/fa';
+import { FaCog, FaTimes } from 'react-icons/fa';
 import './menu-bar.css';
 import { JSonRpcResult, JSonRpcMessage } from '../rpc/rpc-messages';
 import { ClientLibrary } from '../rpc/client-library';
+import { LoginComponent } from '../login-component/login-component';
 
 export class MenuBar extends React.Component {
   handleClose = (e: any) => {
@@ -55,24 +56,19 @@ export class MenuBar extends React.Component {
 
   render() {
     return (
-            <Fragment>
-                <nav className='menu' role='navigation'>
-                    <ul>
-                        <li className='loginLogo'>
-                            <FaUserCircle />
-                        </li>
-                        <li className='status'>
-                            <div className='userId'>0Lucifer0</div>
-                        </li>
-                        <li className='closeLogo'>
-                            <FaTimes onClick={this.handleClose} />
-                        </li>
-                        <li className='optionLogo'>
-                            <FaCog />
-                        </li>
-                    </ul>
-                </nav>
-            </Fragment>
+      <Fragment>
+        <nav className='menu' role='navigation'>
+          <ul>
+            <li><LoginComponent /></li>
+            <li className='closeLogo'>
+              <FaTimes onClick={this.handleClose} />
+            </li>
+            <li className='optionLogo'>
+              <FaCog />
+            </li>
+          </ul>
+        </nav>
+      </Fragment>
     );
   }
 }
