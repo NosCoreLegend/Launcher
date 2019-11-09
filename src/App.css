@@ -1,0 +1,14 @@
+::-webkit-scrollbar { display: none; }
+
+.App {
+  text-align: center;
+  background-image: url("background2.jpg");
+  background-position: center top;
+  background-repeat: no-repeat;
+  background-size: 120%;
+  width:960px;
+  height:680px;
+  overflow: hidden;
+  color:white;
+  text-align: left;
+}

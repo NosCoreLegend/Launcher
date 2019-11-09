@@ -1,0 +1,73 @@
+{
+  "name": "noscore-launcher",
+  "version": "1.0.0",
+  "main": "./dist/main.js",
+  "author": "NosCoreLegend",
+  "description": "Launcher for NosCoreLegend",
+  "license": "MIT",
+  "scripts": {
+    "build": "webpack --mode=production --config webpack.config.js && electron-builder build",
+    "start": "concurrently \"webpack-dev-server --mode=development --hot --inline --config webpack.config.js\" \"wait-on http://localhost:8080/ && electron ./dist/main.js\""
+  },
+  "build": {
+    "appId": "com.noscorelegend.launcher",
+    "asar": true,
+    "files": [
+      "dist/**/*",
+      "package.json",
+      "src/icon.ico"
+    ],
+    "win": {
+      "target": "portable",
+      "icon": "src/icon.ico"
+    },
+    "portable": {
+      "artifactName": "NosCoreLegend.exe",
+      "requestExecutionLevel": "admin",
+      "useZip": true
+    }
+  },
+  "devDependencies": {
+    "@babel/core": "^7.7.2",
+    "@types/node": "^12.12.6",
+    "@types/react": "^16.9.11",
+    "@types/react-dom": "^16.9.4",
+    "babel-loader": "^8.0.6",
+    "babel-preset-es2015-node": "^6.1.1",
+    "babel-preset-react": "^6.24.1",
+    "clean-webpack-plugin": "^3.0.0",
+    "css-loader": "^3.2.0",
+    "electron": "^7.1.1",
+    "electron-builder": "^22.1.0",
+    "file-loader": "^4.2.0",
+    "html-webpack-plugin": "^3.2.0",
+    "image-webpack-loader": "^6.0.0",
+    "standard": "^14.3.1",
+    "standard-loader": "^7.0.0",
+    "style-loader": "^1.0.0",
+    "ts-loader": "^6.2.1",
+    "tslint": "^5.20.1",
+    "tslint-config-standard": "^9.0.0",
+    "tslint-loader": "^3.5.4",
+    "typescript": "^3.7.2",
+    "url-loader": "^2.2.0",
+    "webpack": "^4.41.2",
+    "webpack-cli": "^3.3.10",
+    "webpack-dev-server": "^3.9.0"
+  },
+  "dependencies": {
+    "@babel/preset-env": "^7.7.1",
+    "@babel/preset-react": "^7.7.0",
+    "@types/webpack-env": "^1.14.1",
+    "bootstrap": "^4.3.1",
+    "concurrently": "^5.0.0",
+    "electron-is-dev": "^1.1.0",
+    "guid-typescript": "^1.0.9",
+    "react": "^16.11.0",
+    "react-bootstrap": "^1.0.0-beta.14",
+    "react-dom": "^16.11.0",
+    "react-icons": "^3.8.0",
+    "wait-on": "^3.3.0",
+    "winreg": "^1.2.4"
+  }
+}
