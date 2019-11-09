@@ -7,7 +7,7 @@
   "license": "MIT",
   "scripts": {
     "build": "webpack --mode=production --config webpack.config.js && electron-builder build",
-	"release": "electron-builder build",
+    "release": "electron-builder build",
     "start": "concurrently \"webpack-dev-server --mode=development --hot --inline --config webpack.config.js\" \"wait-on http://localhost:8080/ && electron ./dist/main.js\""
   },
   "build": {
@@ -54,21 +54,20 @@
     "url-loader": "^2.2.0",
     "webpack": "^4.41.2",
     "webpack-cli": "^3.3.10",
-    "webpack-dev-server": "^3.9.0"
-  },
-  "dependencies": {
-    "@babel/preset-env": "^7.7.1",
-    "@babel/preset-react": "^7.7.0",
-    "@types/webpack-env": "^1.14.1",
-    "bootstrap": "^4.3.1",
+    "webpack-dev-server": "^3.9.0",
     "concurrently": "^5.0.0",
-    "electron-is-dev": "^1.1.0",
+    "@types/webpack-env": "^1.14.1",
     "guid-typescript": "^1.0.9",
     "react": "^16.11.0",
     "react-bootstrap": "^1.0.0-beta.14",
     "react-dom": "^16.11.0",
     "react-icons": "^3.8.0",
     "wait-on": "^3.3.0",
-    "winreg": "^1.2.4"
+    "winreg": "^1.2.4",
+    "@babel/preset-env": "^7.7.1",
+    "bootstrap": "^4.3.1"
+  },
+  "dependencies": {
+    "electron-is-dev": "^1.1.0"
   }
 }
