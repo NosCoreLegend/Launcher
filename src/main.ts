@@ -14,6 +14,9 @@ function onReady() {
   const fileName = isDev ? 'http://localhost:8080' : `file://${__dirname}/index.html`;
   mainWindow.loadURL(fileName).then().catch();
   mainWindow.on('close', () => app.quit());
+  if (isDev) {
+    mainWindow.webContents.openDevTools({ mode: 'detach' });
+  }
 }
 
 app.on('ready', () => onReady());

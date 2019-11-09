@@ -26,14 +26,23 @@ export class LoginComponent extends React.Component<LoginComponentProps, LoginCo
         this.showMenu = this.showMenu.bind(this);
         this.closeMenu = this.closeMenu.bind(this);
     }
+
+    emailInput: any;
+    password: any;
+
     showMenu = (event: React.MouseEvent) => {
         event.preventDefault();
 
-        this.setState({ showMenu: true });
+        this.setState({ showMenu: true, userName: this.state.userName });
     }
 
     closeMenu() {
-        this.setState({ showMenu: false });
+        this.setState({ showMenu: false, userName: this.state.userName });
+    }
+
+    login= (event: React.MouseEvent) => {
+        event.preventDefault();
+        this.setState({ showMenu: false, userName:'0Lucifer0' });
     }
 
     render() {
@@ -52,15 +61,15 @@ export class LoginComponent extends React.Component<LoginComponentProps, LoginCo
                         <Form>
                             <Form.Group controlId='formGroupEmail'>
                                 <Form.Label>Login/Email address</Form.Label>
-                                <Form.Control type='email' placeholder='Enter Login/Email' />
+                                <Form.Control ref={this.emailInput} type='email' placeholder='Enter Login/Email' />
                             </Form.Group>
                             <Form.Group controlId='formGroupPassword'>
                                 <Form.Label>Password</Form.Label>
-                                <Form.Control type='password' placeholder='Password' />
+                                <Form.Control ref={this.password} type='password' placeholder='Password' />
                             </Form.Group>
                         </Form>
 
-                        <Button variant='primary' className='loginButton'>
+                        <Button variant='primary' className='loginButton' onClick={this.login}>
                             Log In
                         </Button>
                     </Modal.Body>
