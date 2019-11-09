@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://cdn.discordapp.com/attachments/319565884454731795/426892646288457728/N2.png"/>
+  <img src="https://i.gyazo.com/4d2a4f8f92b2973ca77555db5afc3ee6.gif"/>
 </p>
 
 # NosCoreLegend #
