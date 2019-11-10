@@ -6,6 +6,8 @@
     margin-bottom:40px;
     background: rgba(0,0,0,.4);
     filter: contrast(100%);
+    z-index: 9999;
+    position: relative;
 }
 
 .menu ul {
@@ -44,10 +46,6 @@
   padding-top:5px;
   display: inline;
   color:grey;
-}
-
-.userId {
-  align-content: center;
 }
 
 .smallLogo {

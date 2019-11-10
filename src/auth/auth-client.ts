@@ -53,13 +53,23 @@ export class AuthClient {
 
       const req = http.request(options, (res) => {
         res.on('data', (res) => {
-          const obj = JSON.parse(res);
-          resolve({ user: this.user, token: obj.token, platformGameAccountId: obj.platformGameAccountId });
+          let obj;
+          try {
+            obj = JSON.parse(res);
+          } catch {
+            obj = res.toString();
+          }
+       
+          if (obj.token && obj.platformGameAccountId) {
+            resolve({ user: this.user, token: obj.token, platformGameAccountId: obj.platformGameAccountId });
+          } else {
+            resolve({ error: res.toString() });
+          }
         });
+      });
 
-        req.on('error', err => {
-          reject(err);
-        });
+      req.on('error', err => {
+        resolve({ error: 'Something went wrong while trying communicate with the server. The server may be down.'});
       });
 
       req.write(data);
