@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import { FaCog, FaTimes } from 'react-icons/fa';
-import './menu-bar.css';
+import styles from './menu-bar.less';
 import { LoginComponent, LoginComponentProps } from '../login-component/login-component';
 
 export class MenuBar extends React.Component<LoginComponentProps, {}> {
@@ -12,13 +12,13 @@ export class MenuBar extends React.Component<LoginComponentProps, {}> {
   render() {
     return (
       <Fragment>
-        <nav className='menu' role='navigation'>
+        <nav className={styles.menu} role='navigation'>
           <ul>
             <li><LoginComponent {...this.props} /></li>
-            <li className='closeLogo'>
+            <li className={styles.closeLogo}>
               <FaTimes onClick={this.handleClose} />
             </li>
-            <li className='optionLogo'>
+            <li className={styles.optionLogo}>
               <FaCog />
             </li>
           </ul>

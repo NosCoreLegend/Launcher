@@ -1,21 +1,21 @@
 import React, { Fragment } from 'react';
 import { GiCalendar } from 'react-icons/gi';
 import { FaStar, FaUsers, FaLightbulb } from 'react-icons/fa';
-import './news-panel.css';
+import status from './news-panel.less';
 import { AdsCarousel } from '../ads-carousel/ads-carousel';
 
 export class NewsPanel extends React.Component {
     render() {
         return (
             <Fragment>
-                <div className='statusPanel'>
+                <div className={status.statusPanel}>
                     <h5><FaStar /> Status</h5>
                     <ul>
                         <li><FaLightbulb /> Server Online</li>
                         <li><FaUsers /> 299 players</li>
                     </ul>
                 </div>
-                <div className='newsPanel'>
+                <div className={status.newsPanel}>
                     <h5><GiCalendar />News & Events</h5>
                     <ul>
                         <li>22.06.2019 Double Jackpot Event</li>

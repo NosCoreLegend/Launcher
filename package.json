@@ -2,6 +2,7 @@
   "name": "noscore-launcher",
   "version": "1.0.0",
   "main": "./dist/main.js",
+  "typings": "typings.d.ts",
   "author": "NosCoreLegend",
   "description": "Launcher for NosCoreLegend",
   "license": "MIT",
@@ -30,6 +31,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.7.2",
+    "@teamsupercell/typings-for-css-modules-loader": "^2.0.0",
     "@types/node": "^12.12.6",
     "@types/react": "^16.9.11",
     "@types/react-dom": "^16.9.4",

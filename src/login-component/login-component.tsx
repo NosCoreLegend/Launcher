@@ -3,7 +3,7 @@ import React, { Fragment } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
-import './login-component.css';
+import styles from './login-component.less';
 import { AuthInformation, AuthClient } from '../auth/auth-client';
 import { JSonRpcResult, JSonRpcMessage } from '../rpc/rpc-messages';
 import { ClientLibrary } from '../rpc/client-library';
@@ -131,11 +131,11 @@ export class LoginComponent extends React.Component<LoginComponentProps, LoginCo
     render() {
         const { userName } = this.state;
         return (<Fragment>
-            <span className='status login'>
-                <FaUserCircle onClick={this.showMenu} className='loginLogo' />
-                {userName !== '' ? <div className='userId'>{userName || ''}</div> : ''}
+            <span className={styles.login}>
+                <FaUserCircle onClick={this.showMenu} className={styles.loginLogo} />
+                {userName !== '' ? <div className={styles.userId}>{userName || ''}</div> : ''}
             </span>
-            {userName === '' ? <Modal className='loginMenu' show={this.state.showMenu} centered onHide={this.closeMenu}>
+            {userName === '' ? <Modal className={styles.loginMenu} show={this.state.showMenu} centered onHide={this.closeMenu}>
                 <Modal.Header closeButton>
                     <Modal.Title>Login</Modal.Title>
                 </Modal.Header>
@@ -150,13 +150,13 @@ export class LoginComponent extends React.Component<LoginComponentProps, LoginCo
                             <Form.Label>Password</Form.Label>
                             <Form.Control id='password' type='password' placeholder='Password' required />
                         </Form.Group>
-                        <Button variant='primary' className='loginButton' type='submit'>
+                        <Button variant='primary' className={styles.loginButton} type='submit'>
                             Log In
                         </Button>
                     </Form>
                 </Modal.Body>
             </Modal> : this.state.showMenu && <div>
-                <div className='logoutMenu'>
+                <div className={styles.logoutMenu}>
                     <Button variant='link' onClick={this.logout}>Logout</Button>
                 </div>
             </div>}
@@ -164,3 +164,4 @@ export class LoginComponent extends React.Component<LoginComponentProps, LoginCo
         );
     }
 }
+

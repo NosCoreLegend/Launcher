@@ -1,5 +1,5 @@
 import React from 'react';
-import './App.css';
+import styles from './App.less';
 import 'bootstrap/dist/css/bootstrap.css';
 import { MenuBar } from './menu-bar/menu-bar';
 import { LeftPanel } from './left-panel/left-panel';
@@ -19,7 +19,7 @@ class App extends React.Component<{}, AuthInformation> {
 
   render() {
     return (
-      <div className='App'>
+      <div className={styles.App}>
         <MenuBar authCallBack={this.getAuthInfo.bind(this)} />
         <div className='container'>
           <div className='row'>
