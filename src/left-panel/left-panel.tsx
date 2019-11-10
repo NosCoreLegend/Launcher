@@ -1,7 +1,7 @@
 import React from 'react';
 import Button from 'react-bootstrap/Button';
 import ProgressBar from 'react-bootstrap/ProgressBar';
-import './left-panel.css';
+import styles from './left-panel.less';
 import { JSonRpcResult, JSonRpcMessage } from '../rpc/rpc-messages';
 import { ClientLibrary } from '../rpc/client-library';
 import { AuthInformation } from '../auth/auth-client';
@@ -56,15 +56,15 @@ export class LeftPanel extends React.Component<AuthInformation, {}> {
 
   render() {
     return (
-      <div className='leftPanel'>
+      <div className={styles.leftPanel}>
         <h1>Noscore Legend</h1>
         <p>
           NosCore Legend is a Nostale private server running on NosCoreIO. This server is meant to be used for testing the NosCore emulator.
                 </p>
-        <nav className='leftNavBar'>
+        <nav className={styles.leftNavBar}>
           Website | Discord | Support | Terms of Use
                 </nav>
-        <Button onClick={this.startNostale} className='playButton btn-lg' variant='primary' disabled={this.props.user === ''}>
+        <Button onClick={this.startNostale} className={`${styles.playButton} btn-lg`} variant='primary' disabled={this.props.user === ''}>
           Play
                 </Button>
         {/* <ProgressBar className="progressBar" now={20} label={`20%`} /> */}
