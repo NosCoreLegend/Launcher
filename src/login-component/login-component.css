@@ -9,6 +9,7 @@
   margin-right:5px;
   text-align: center;
   display:inline-block;
+  z-index:10000;
 }
 
 .loginLogo:hover, .loginLogo:hover {
@@ -17,6 +18,7 @@
 
 .userId {
   display:inline;
+  align-content: center;
 }
 
 .login {
@@ -37,4 +39,15 @@
 
 .loginButton {
   width:100%;
+}
+
+.logoutMenu {
+  padding-left:50px;
+  padding-top:50px;
+  color:grey;
+  margin-left:-40px;
+  margin-top:-50px;
+  height:auto;
+  width:170px;
+  background:rgba(0,0,0,.7);
 }

@@ -1,5 +1,4 @@
 import http from 'http';
-import { Guid } from 'guid-typescript';
 import { AuthInformation } from '../auth/auth-client';
 
 export class ClientLibrary {
@@ -9,6 +8,7 @@ export class ClientLibrary {
   path: string;
   code: string;
   installationId: string;
+  server: any;
 
   constructor(url: string, path: string, port: number, authInfo: AuthInformation) {
     this.url = url;
@@ -56,20 +56,20 @@ export class ClientLibrary {
         }
       };
 
-      const req = http.request(options, (res) => {
+      this.server = http.request(options, (res) => {
         res.on('data', (res) => {
           const obj = JSON.parse(res);
           this.code = obj.code;
           resolve(res);
         });
 
-        req.on('error', err => {
+        this.server.on('error', (err: any) => {
           reject(err);
         });
       });
 
-      req.write(data);
-      req.end();
+      this.server.write(data);
+      this.server.end();
     });
   }
 

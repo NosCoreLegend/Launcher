@@ -1,4 +1,4 @@
-import { app, BrowserWindow, ipcMain } from 'electron';
+import { app, BrowserWindow } from 'electron';
 const isDev = require('electron-is-dev');
 declare var __dirname: string;
 let mainWindow: Electron.BrowserWindow;

@@ -10,5 +10,6 @@
   height:680px;
   overflow: hidden;
   color:white;
+  user-select: none;
   text-align: left;
 }

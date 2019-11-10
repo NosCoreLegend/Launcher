@@ -7,14 +7,13 @@ import { NewsPanel } from './news-panel/news-panel';
 import { AuthInformation } from './auth/auth-client';
 
 class App extends React.Component<{}, AuthInformation> {
+  server: any;
   constructor(props: {}) {
     super(props);
-
     this.state = { token: '', platformGameAccountId: '', user: '' };
   }
 
   getAuthInfo = (state: AuthInformation) => {
-    console.log(state.user);
     this.setState(state);
   }
 
@@ -25,7 +24,7 @@ class App extends React.Component<{}, AuthInformation> {
         <div className='container'>
           <div className='row'>
             <div className='row'>
-              <div className='col-7'> <LeftPanel {...this.state} /></div>
+              <div className='col-7'><LeftPanel {...this.state} /></div>
               <div className='col-5'><NewsPanel /></div>
             </div>
           </div>

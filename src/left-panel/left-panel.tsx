@@ -9,58 +9,10 @@ import { AuthInformation } from '../auth/auth-client';
 const nosDirectory = 'C:\\Program Files (x86)\\NosTale\\';
 
 export class LeftPanel extends React.Component<AuthInformation, {}> {
-
-  server: any;
-  componentDidMount() {
-    this.startPipe();
-  }
-
-  componentWillUnmount() {
-    if (this.server) {
-      this.server.close();
-    }
-  }
-
-  startPipe = () => {
-    let clientLibrary = new ClientLibrary('localhost', '/api/v1/auth/thin', 5000, this.props);
-
-    let net = require('net');
-    let PIPE_NAME = 'GameforgeClientJSONRPCMS2';
-    let PIPE_PATH = '\\\\.\\pipe\\' + PIPE_NAME;
-
-    this.server = net.createServer(function (stream: any) {
-      stream.on('data', async (data: any) => {
-        console.log('New packet received', String.fromCharCode.apply(null, data));
-        const obj = JSON.parse(String.fromCharCode.apply(null, data)) as JSonRpcMessage;
-        let returnMessage = {
-          id: obj.id,
-          jsonrpc: obj.jsonrpc,
-          result: ''
-        } as JSonRpcResult;
-        console.log(obj.params);
-        switch (obj.method) {
-          case 'ClientLibrary.isClientRunning':
-            returnMessage.result = clientLibrary.IsClientRunning(obj.params.sessionId);
-            break;
-          case 'ClientLibrary.initSession':
-            returnMessage.result = clientLibrary.InitSession(obj.params.sessionId);
-            break;
-          case 'ClientLibrary.queryAuthorizationCode':
-            returnMessage.result = await clientLibrary.QueryAuthorizationCode(obj.params.sessionId);
-            break;
-          case 'ClientLibrary.queryGameAccountName':
-            returnMessage.result = clientLibrary.QueryGameAccountName(obj.params.sessionId);
-            break;
-        }
-        stream.write(JSON.stringify(returnMessage));
-        console.log('New packet sent', JSON.stringify(returnMessage));
-      });
-    });
-
-    this.server.listen(PIPE_PATH);
-  }
-
   startNostale = () => {
+    if(this.props.user === '') {
+      return;
+    }
     const executablePath = `${nosDirectory}NosCore.exe`;
     const fs = require('fs');
 
@@ -99,7 +51,6 @@ export class LeftPanel extends React.Component<AuthInformation, {}> {
       });
     });
 
-    console.log(this.props.user);
     require('child_process').execFile(executablePath, parameters);
   }
 
@@ -113,7 +64,7 @@ export class LeftPanel extends React.Component<AuthInformation, {}> {
         <nav className='leftNavBar'>
           Website | Discord | Support | Terms of Use
                 </nav>
-        <Button onClick={this.startNostale} className='playButton btn-lg' variant='primary'>
+        <Button onClick={this.startNostale} className='playButton btn-lg' variant='primary' disabled={this.props.user === ''}>
           Play
                 </Button>
         {/* <ProgressBar className="progressBar" now={20} label={`20%`} /> */}
