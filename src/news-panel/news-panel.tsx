@@ -3,9 +3,11 @@ import { GiCalendar } from 'react-icons/gi';
 import { FaStar, FaUsers, FaLightbulb } from 'react-icons/fa';
 import status from './news-panel.less';
 import { AdsCarousel } from '../ads-carousel/ads-carousel';
+import Store from 'electron-store';
 
 export class NewsPanel extends React.Component {
     render() {
+        const store = new Store();
         return (
             <Fragment>
                 <div className={status.statusPanel}>
@@ -17,13 +19,7 @@ export class NewsPanel extends React.Component {
                 </div>
                 <div className={status.newsPanel}>
                     <h5><GiCalendar />News & Events</h5>
-                    <ul>
-                        <li>22.06.2019 Double Jackpot Event</li>
-                        <li>21.06.2019 Event: Triple Fortune</li>
-                        <li>21.06.2019 NosVille in Football Fever!</li>
-                        <li>18.06.2019 Maintenance</li>
-                        <li>15.06.2019 24hr Happy Hour - let it rain NosDollars!</li>
-                    </ul>
+                    <ul>{Object.keys(store.get('configuration').News).map((index: string) => <li key={index}><a href={store.get('configuration').News[index]}>{index}</a></li>)}</ul>
                 </div>
                 <AdsCarousel />
             </Fragment>

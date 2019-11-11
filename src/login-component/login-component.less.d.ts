@@ -4,7 +4,6 @@ export interface ILoginComponentLess {
   loginLogo: string;
   loginMenu: string;
   logoutMenu: string;
-  menu: string;
   userId: string;
 }
 

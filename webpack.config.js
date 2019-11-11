@@ -4,7 +4,6 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const HtmlWebpackHotPlugin = require('html-webpack-hot-plugin')
 
 let htmlHotPlugin = new HtmlWebpackHotPlugin({ hot: true });
-
 let mode = process.argv[process.argv.indexOf('--mode') + 1];
 console.log(`webpack mode is ${process.argv[process.argv.indexOf('--mode') + 1]}`)
 if (mode === 'development') {
@@ -69,7 +68,8 @@ const commonConfig = {
         use: [
           'style-loader',
           '@teamsupercell/typings-for-css-modules-loader',
-          { loader: 'css-loader', options: { modules:true, sourceMap: true } }
+          { loader: 'css-loader', options: { modules:true, sourceMap: true } },
+          "less-loader"
         ]
       },
     ]

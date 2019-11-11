@@ -1,16 +1,15 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import Button from 'react-bootstrap/Button';
 import ProgressBar from 'react-bootstrap/ProgressBar';
 import styles from './left-panel.less';
-import { JSonRpcResult, JSonRpcMessage } from '../rpc/rpc-messages';
-import { ClientLibrary } from '../rpc/client-library';
 import { AuthInformation } from '../auth/auth-client';
+import Store from 'electron-store';
 
 const nosDirectory = 'C:\\Program Files (x86)\\NosTale\\';
 
 export class LeftPanel extends React.Component<AuthInformation, {}> {
   startNostale = () => {
-    if(this.props.user === '') {
+    if (this.props.user === '') {
       return;
     }
     const executablePath = `${nosDirectory}NosCore.exe`;
@@ -55,18 +54,15 @@ export class LeftPanel extends React.Component<AuthInformation, {}> {
   }
 
   render() {
+    const store = new Store();
     return (
       <div className={styles.leftPanel}>
-        <h1>Noscore Legend</h1>
-        <p>
-          NosCore Legend is a Nostale private server running on NosCoreIO. This server is meant to be used for testing the NosCore emulator.
-                </p>
-        <nav className={styles.leftNavBar}>
-          Website | Discord | Support | Terms of Use
-                </nav>
-        <Button onClick={this.startNostale} className={`${styles.playButton} btn-lg`} variant='primary' disabled={this.props.user === ''}>
-          Play
-                </Button>
+        <h1>{store.get('configuration').Title}</h1>
+        <p>{store.get('configuration').Description}</p>
+        <nav className={styles.leftNavBar}><ul>
+          {Object.keys(store.get('configuration').Links).map((index: string) => <li key={index}><a href={store.get('configuration').Links[index]}>{index}</a></li>)}
+        </ul></nav>
+        <Button onClick={this.startNostale} className={`${styles.playButton} btn-lg`} variant='primary' disabled={this.props.user === ''}>PLAY</Button>
         {/* <ProgressBar className="progressBar" now={20} label={`20%`} /> */}
       </div>
     );

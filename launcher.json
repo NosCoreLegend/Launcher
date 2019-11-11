@@ -1,0 +1,27 @@
+{
+    "Title": "Noscore Legend",
+    "Description": "NosCore Legend is a Nostale private server running on NosCoreIO. This server is meant to be used for testing the NosCore emulator.",
+    "Links": {
+        "Website":"",
+        "Discord":"",
+        "Support":"",
+        "Terms Of Use":""
+    },
+    "StatusUrl": "",
+    "Auth": {
+        "URL":"https://127.0.0.1/api/v1/auth/thin",
+        "Port":5000
+    },
+    "LoginServerIp": "127.0.0.1",
+    "News": {
+        "22.06.2019 Double Jackpot Event": "",
+        "21.06.2019 Event: Triple Fortune": "",
+        "21.06.2019 NosVille in Football Fever! ": "",
+        "18.06.2019 Maintenance": "",
+        "15.06.2019 24hr Happy Hour - let it rain NosDollars!": ""
+    },
+    "Ads": {
+        "First Ads": {"URL":"https://en-images-nostale.gameforge.com//images/wallpapers/Feen3.jpg", "Description": ""},
+        "Second Ads": {"URL":"https://en-images-nostale.gameforge.com//images/wallpapers/Feen2.jpg", "Description": ""}
+    }
+}

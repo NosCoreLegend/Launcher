@@ -61,16 +61,21 @@
   "dependencies": {
     "@babel/preset-env": "^7.7.1",
     "@babel/preset-react": "^7.7.0",
+    "@types/request": "^2.48.3",
     "@types/webpack-env": "^1.14.1",
     "bootstrap": "^4.3.1",
     "concurrently": "^5.0.0",
     "electron-is-dev": "^1.1.0",
     "electron-store": "^5.1.0",
     "guid-typescript": "^1.0.9",
+    "less": "^3.10.3",
+    "less-loader": "^5.0.0",
+    "mini-css-extract-plugin": "^0.8.0",
     "react": "^16.11.0",
     "react-bootstrap": "^1.0.0-beta.14",
     "react-dom": "^16.11.0",
     "react-icons": "^3.8.0",
+    "request": "^2.88.0",
     "wait-on": "^3.3.0",
     "winreg": "^1.2.4"
   }

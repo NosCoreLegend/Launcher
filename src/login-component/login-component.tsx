@@ -7,7 +7,7 @@ import styles from './login-component.less';
 import { AuthInformation, AuthClient } from '../auth/auth-client';
 import { JSonRpcResult, JSonRpcMessage } from '../rpc/rpc-messages';
 import { ClientLibrary } from '../rpc/client-library';
-const Store = require('electron-store');
+import Store from 'electron-store';
 
 interface LoginComponentState {
     showMenu: boolean;
@@ -45,7 +45,7 @@ export class LoginComponent extends React.Component<LoginComponentProps, LoginCo
     login = async (password: string, email: string) => {
         const store = new Store();
         if (email && password) {
-            let authclient = new AuthClient(email, password, 'fr-FR', 'localhost', '/api/v1/auth/thin', 5000);
+            let authclient = new AuthClient(email, password, 'fr-FR', 'http://127.0.0.1', '/api/v1/auth/thin/sessions', 5000);
             let authInfo = await authclient.getSessionToken();
             if (authInfo && (authInfo as AuthInformation).token) {
                 this.props.authCallBack(authInfo as AuthInformation);
@@ -62,7 +62,7 @@ export class LoginComponent extends React.Component<LoginComponentProps, LoginCo
     }
 
     startPipe = (state: AuthInformation) => {
-        const clientLibrary = new ClientLibrary('localhost', '/api/v1/auth/thin', 5000, state);
+        const clientLibrary = new ClientLibrary('http://127.0.0.1', '/api/v1/auth/thin/codes', 5000, state);
 
         let net = require('net');
         let PIPE_NAME = 'GameforgeClientJSONRPCMS2';
@@ -124,7 +124,6 @@ export class LoginComponent extends React.Component<LoginComponentProps, LoginCo
         event.preventDefault();
         let password = (document.getElementById('password') as HTMLInputElement).value;
         let email = (document.getElementById('email') as HTMLInputElement).value;
-        console.log('test');
         this.login(password, email);
     }
 

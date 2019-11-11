@@ -1,4 +1,4 @@
-import http from 'http';
+import request from 'request';
 import { AuthInformation } from '../auth/auth-client';
 
 export class ClientLibrary {
@@ -8,7 +8,6 @@ export class ClientLibrary {
   path: string;
   code: string;
   installationId: string;
-  server: any;
 
   constructor(url: string, path: string, port: number, authInfo: AuthInformation) {
     this.url = url;
@@ -38,38 +37,30 @@ export class ClientLibrary {
         }
       });
 
-      const data = JSON.stringify({
+      const data = {
         PlatformGameAccountId: this.authInfo.platformGameAccountId
-      });
+      };
 
       const options = {
-        hostname: this.url,
-        port: this.port,
-        path: this.path + '/codes',
-        method: 'POST',
+        url: this.url + ':' + this.port + this.path,
         headers: {
           'TNT-Installation-Id': this.installationId,
           'User-Agent': 'TNTClientMS2/1.3.39',
           'Authorization': `Bearer ${this.authInfo.token}`,
           'Content-Type': 'application/json',
-          'Content-Length': data.length
-        }
+          'Content-Length': Buffer.byteLength(JSON.stringify(data))
+        },
+        json: data
       };
 
-      this.server = http.request(options, (res) => {
-        res.on('data', (res) => {
-          const obj = JSON.parse(res);
-          this.code = obj.code;
-          resolve(res);
-        });
-
-        this.server.on('error', (err: any) => {
+      request.post(options, (err: any, res: any, body: any) => {
+        if (body) {
+          this.code = body.code;
+          resolve(body);
+        } else if (err) {
           reject(err);
-        });
+        }
       });
-
-      this.server.write(data);
-      this.server.end();
     });
   }
 
