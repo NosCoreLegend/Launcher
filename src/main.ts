@@ -1,5 +1,7 @@
 import { app, BrowserWindow } from 'electron';
-const isDev = require('electron-is-dev');
+import request from 'request';
+import isDev from 'electron-is-dev';
+import Store from 'electron-store';
 declare var __dirname: string;
 let mainWindow: Electron.BrowserWindow;
 
@@ -9,6 +11,17 @@ function onReady() {
     webPreferences: {
       nodeIntegration: true
     }
+  });
+  const configUrl = 'https://noscore-legend-launcher.s3.eu-west-3.amazonaws.com/launcher.json';
+  const store = new Store();
+  request.get(configUrl).on('response', (response: any) => {
+    let body = '';
+    response.on('data', function (d: any) {
+      body += d;
+    });
+    response.on('end', function () {
+      store.set('configuration', JSON.parse(body));
+    });
   });
 
   const fileName = isDev ? 'http://localhost:8080' : `file://${__dirname}/index.html`;

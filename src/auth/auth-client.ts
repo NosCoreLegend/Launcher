@@ -1,4 +1,4 @@
-import http from 'http';
+import request from 'request';
 import { Guid } from 'guid-typescript';
 
 export interface AuthInformation {
@@ -32,48 +32,34 @@ export class AuthClient {
     return new Promise((resolve, reject) => {
       process.env['_TNT_SESSION_ID'] = Guid.create().toString();
 
-      const data = JSON.stringify({
+      const data = {
         gfLang: this.language.substring(0, 2),
         identity: this.user,
         locale: this.language,
         password: this.password,
         platformGameId: 'dd4e22d6-00d1-44b9-8126-d8b40e0cd7c9'
-      });
-
-      const options = {
-        hostname: this.url,
-        port: this.port,
-        path: this.path + '/sessions',
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Content-Length': data.length
-        }
       };
 
-      const req = http.request(options, (res) => {
-        res.on('data', (res) => {
-          let obj;
-          try {
-            obj = JSON.parse(res);
-          } catch {
-            obj = res.toString();
-          }
-       
-          if (obj.token && obj.platformGameAccountId) {
-            resolve({ user: this.user, token: obj.token, platformGameAccountId: obj.platformGameAccountId });
+      const options = {
+        url: this.url + ':' + this.port + this.path,
+        headers: {
+          'Content-Type': 'application/json',
+          'Content-Length': Buffer.byteLength(JSON.stringify(data))
+        },
+        json: data
+      };
+
+      request.post(options, (err: any, res: any, body: any) => {
+        if (body) {
+          if (body.token && body.platformGameAccountId) {
+            resolve({ user: this.user, token: body.token, platformGameAccountId: body.platformGameAccountId });
           } else {
-            resolve({ error: res.toString() });
+            resolve({ error: body.toString() });
           }
-        });
+        } else if (err) {
+          resolve({ error: 'Something went wrong while trying communicate with the server. The server may be down.' });
+        }
       });
-
-      req.on('error', err => {
-        resolve({ error: 'Something went wrong while trying communicate with the server. The server may be down.'});
-      });
-
-      req.write(data);
-      req.end();
     });
   }
 }

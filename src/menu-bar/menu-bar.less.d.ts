@@ -3,7 +3,6 @@ export interface IMenuBarLess {
   menu: string;
   optionLogo: string;
   smallLogo: string;
-  status: string;
 }
 
 export const locals: IMenuBarLess;
