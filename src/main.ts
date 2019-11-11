@@ -12,7 +12,7 @@ function onReady() {
       nodeIntegration: true
     }
   });
-  const configUrl = 'https://noscore-legend-launcher.s3.eu-west-3.amazonaws.com/launcher.json';
+  const configUrl = 'https://d847yipi3worj.cloudfront.net/launcher.json';
   const store = new Store();
   request.get(configUrl).on('response', (response: any) => {
     let body = '';
