@@ -1,6 +1,7 @@
 <p align="center">
-  <img src="https://i.gyazo.com/324eab36650ce4a04a37fb6940de5a34.png"/>
-  <img src="https://i.gyazo.com/40d5468a5f88f20b87e9fb2bb34040ad.png"/> 
+  <img src="https://i.gyazo.com/cf2202cd4690a7e1d303529d8485980b.png"/>
+  <img src="https://i.gyazo.com/80930fa909e0bfd9bf3d97c31ed91753.png"/> 
+  <img src="https://i.gyazo.com/6639711840fc499cd8aace6b2c27447e.png"/> 
 </p>
 
 # NosCoreLegend #
