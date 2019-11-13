@@ -2,7 +2,7 @@
 
 ## Screenshots ##
 <p align="center">
-  <img src="https://i.gyazo.com/cf2202cd4690a7e1d303529d8485980b.png"/>
+  <img src="https://i.gyazo.com/7f4b927f085a144ead7a80e722cbf185.jpg"/>
 </p>
 
 ## You want to contribute ? ##

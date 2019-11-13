@@ -131,7 +131,7 @@ export class LoginComponent extends React.Component<LoginComponentProps, LoginCo
         const { userName } = this.state;
         return (<Fragment>
             <span className={styles.login}>
-                <FaUserCircle onClick={this.showMenu} className={styles.loginLogo} />
+                <FaUserCircle onClick={this.showMenu} className={`${userName !== '' ? styles.online : ''} ${styles.loginLogo}`} />
                 {userName !== '' ? <div className={styles.userId}>{userName || ''}</div> : ''}
             </span>
             {userName === '' ? <Modal className={styles.loginMenu} show={this.state.showMenu} centered onHide={this.closeMenu}>
