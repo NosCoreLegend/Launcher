@@ -38,14 +38,6 @@ export class AdsCarousel extends React.Component {
   render() {
     return (
       <Carousel pauseOnHover={true} interval={5000} className={styles.adsCarousel}>
-        <Carousel.Item className={styles.carouselItem}>
-          <img
-            className='d-block'
-            src={require('./NosCoreLegend.png')}
-            alt='First slide'
-            width="100%"
-          />
-        </Carousel.Item>
         {this.renderAds()}
       </Carousel>
     );
