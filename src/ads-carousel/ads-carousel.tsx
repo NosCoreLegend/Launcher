@@ -26,13 +26,15 @@ export class AdsCarousel extends React.Component {
     const store = new Store();
     const ads = store.get('configuration').Ads;
     return Object.keys(ads).map((index: string) =>
-    <Carousel.Item key={index} className={styles.carouselItem}>
-     <img
-        className='d-block'
-        src={ads[index].URL}
-        alt={ads[index].Description}
-      />
-    </Carousel.Item>);
+      <Carousel.Item key={index} className={styles.carouselItem}>
+        <a href={ads[index].Url}>
+          <img
+            className='d-block'
+            src={ads[index].Img}
+            alt={ads[index].Description}
+          />
+        </a>
+      </Carousel.Item>);
   }
 
   render() {
