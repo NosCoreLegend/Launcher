@@ -9,7 +9,7 @@
     },
     "StatusUrl": "",
     "Auth": {
-        "URL":"https://127.0.0.1/api/v1/auth/thin",
+        "Url":"https://127.0.0.1/api/v1/auth/thin",
         "Port":5000
     },
     "LoginServerIp": "127.0.0.1",
@@ -21,7 +21,6 @@
         "15.06.2019 24hr Happy Hour - let it rain NosDollars!": ""
     },
     "Ads": {
-        "First Ads": {"URL":"https://en-images-nostale.gameforge.com//images/wallpapers/Feen3.jpg", "Description": ""},
-        "Second Ads": {"URL":"https://en-images-nostale.gameforge.com//images/wallpapers/Feen2.jpg", "Description": ""}
+        "First Ads": {"Img":"http://d847yipi3worj.cloudfront.net/NosCoreLegend.png", "Url":"", "Description": ""}
     }
 }
