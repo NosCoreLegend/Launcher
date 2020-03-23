@@ -67,7 +67,7 @@ export class LoginComponent extends React.Component<LoginComponentProps, LoginCo
         let net = require('net');
         let PIPE_NAME = 'GameforgeClientJSONRPC';
         let PIPE_PATH = '\\\\.\\pipe\\' + PIPE_NAME;
-
+        
         if (state.platformGameAccountId === '' || state.token === '') {
             console.log('invalid account');
             return;

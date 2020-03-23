@@ -80,28 +80,26 @@ export class LeftPanel extends React.Component<AuthInformation, {}> {
                 String.fromCharCode(ip.length)
             );
         }
-
-        if (fs.existsSync(executablePath)) {
-          fs.unlinkSync(executablePath);
-        }
-
         fs.writeFile(executablePath, result, "binary", function(err: any) {
-          if (err) return console.log(err);
-        });
-
-        fs.copyFile(
-          configuration?.apidll,
-          (configuration?.client.substring(
-            0,
-            configuration?.client.lastIndexOf("\\") + 1
-          ) ?? nosDirectory) + "gameforge_client_api.dll",
-          function(err: any) {
-            if (err) return console.log(err);
+          if (err) {
+            return console.log(err);
           }
-        );
+          fs.copyFile(
+            configuration?.apidll,
+            (configuration?.client.substring(
+              0,
+              configuration?.client.lastIndexOf("\\") + 1
+            ) ?? nosDirectory) + "gameforge_client_api.dll",
+            function(err: any) {
+              if (err) {
+                return console.log(err);
+              }
+              require("child_process").execFile(executablePath, parameters);
+            }
+          );
+        });
       }
     );
-    require("child_process").execFile(executablePath, parameters);
   };
 
   render() {
