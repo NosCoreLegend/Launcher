@@ -65,7 +65,7 @@ export class LoginComponent extends React.Component<LoginComponentProps, LoginCo
         const clientLibrary = new ClientLibrary('http://127.0.0.1', '/api/v1/auth/thin/codes', 5000, state);
 
         let net = require('net');
-        let PIPE_NAME = 'GameforgeClientJSONRPCMS2';
+        let PIPE_NAME = 'GameforgeClientJSONRPC';
         let PIPE_PATH = '\\\\.\\pipe\\' + PIPE_NAME;
 
         if (state.platformGameAccountId === '' || state.token === '') {
