@@ -12,6 +12,8 @@ import Store from "electron-store";
 interface ConfigurationComponentState {
   showMenu: boolean;
   error: string;
+  client: string | undefined;
+  apidll: string | undefined;
 }
 
 export interface ConfigurationComponentProps {}
@@ -21,6 +23,7 @@ export class ConfigurationComponent extends React.Component<
   ConfigurationComponentState
 > {
   server: any;
+
   constructor(
     props: ConfigurationComponentState,
     state: ConfigurationComponentState
@@ -29,7 +32,9 @@ export class ConfigurationComponent extends React.Component<
 
     this.state = {
       showMenu: false,
-      error: ""
+      error: "",
+      apidll: undefined,
+      client: undefined
     };
 
     this.showMenu = this.showMenu.bind(this);
@@ -38,22 +43,54 @@ export class ConfigurationComponent extends React.Component<
 
   componentDidMount() {
     const store = new Store();
-    const configuration = store.get("configuration");
-    if (configuration) {
-    }
+    const configuration = store.get("user-configuration");
+
+    this.setState({
+      client: configuration?.client ?? undefined,
+      apidll: configuration?.apidll ?? undefined,
+      error: "",
+      showMenu: this.state.showMenu
+    });
   }
 
   configurationForm = (event: any) => {
     event.preventDefault();
+    const client = (document.getElementById("clientpath") as HTMLInputElement)
+      .files;
+    const apidll = (document.getElementById("dllpath") as HTMLInputElement)
+      .files;
+    const store = new Store();
+    if (client && apidll) {
+      store.set("user-configuration", {
+        client: client[0]?.path,
+        apidll: apidll[0]?.path
+      });
+      this.setState({
+        showMenu: !this.state.showMenu,
+        error: "",
+        client: client[0]?.path,
+        apidll: apidll[0]?.path
+      });
+    }
   };
 
   showMenu = (event: React.MouseEvent) => {
     event.preventDefault();
-    this.setState({ showMenu: !this.state.showMenu });
+    this.setState({
+      showMenu: !this.state.showMenu,
+      error: "",
+      client: this.state.client,
+      apidll: this.state.apidll
+    });
   };
 
   closeMenu = () => {
-    this.setState({ showMenu: false });
+    this.setState({
+      showMenu: false,
+      error: "",
+      client: this.state.client,
+      apidll: this.state.apidll
+    });
   };
 
   render() {
@@ -75,11 +112,17 @@ export class ConfigurationComponent extends React.Component<
                 <div className="alert alert-danger">{this.state.error}</div>
               )}
               <Form.Group>
-                <Form.Label>Client exe path</Form.Label>
-                <Form.Control id="clientpath" type="file" accept=".exe" />
+              <Form.Label>NostaleClientX.exe path</Form.Label>
+              <p className={styles.label}>{this.state.client}</p>
+                <Form.Control
+                  id="clientpath"
+                  type="file"
+                  accept=".exe"
+                />
               </Form.Group>
               <Form.Group>
-                <Form.Label>Official Launcher dll Path</Form.Label>
+                <Form.Label>gameforge_client_api.dll path</Form.Label>
+                <p className={styles.label}>{this.state.apidll}</p>
                 <Form.Control
                   id="dllpath"
                   type="file"

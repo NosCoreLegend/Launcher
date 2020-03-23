@@ -2,6 +2,7 @@ declare namespace ConfigurationComponentLessModule {
   export interface IConfigurationComponentLess {
     configurationMenu: string;
     configureButton: string;
+    label: string;
   }
 }
 
