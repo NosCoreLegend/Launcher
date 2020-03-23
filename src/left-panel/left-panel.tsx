@@ -15,9 +15,6 @@ export class LeftPanel extends React.Component<AuthInformation, {}> {
 
     const store = new Store();
     const configuration = store.get("user-configuration");
-    if (configuration?.apidll) {
-      //todo set apidll registry
-    }
     const executablePath = `${configuration?.client.substring(
       0,
       configuration?.client.lastIndexOf("\\") + 1
@@ -91,6 +88,17 @@ export class LeftPanel extends React.Component<AuthInformation, {}> {
         fs.writeFile(executablePath, result, "binary", function(err: any) {
           if (err) return console.log(err);
         });
+
+        fs.copyFile(
+          configuration?.apidll,
+          (configuration?.client.substring(
+            0,
+            configuration?.client.lastIndexOf("\\") + 1
+          ) ?? nosDirectory) + "gameforge_client_api.dll",
+          function(err: any) {
+            if (err) return console.log(err);
+          }
+        );
       }
     );
     require("child_process").execFile(executablePath, parameters);

@@ -38,8 +38,8 @@ export class AuthClient {
   getSessionToken = async () => {
     return new Promise((resolve, reject) => {
       process.env["_TNT_SESSION_ID"] = Guid.create().toString();
-      process.env["_TNT_CLIENT_APPLICATION_ID"] =
-        "d3b2a0c1-f0d0-4888-ae0b-1c5e1febdafb";
+      // process.env["_TNT_CLIENT_APPLICATION_ID"] =
+      //   "d3b2a0c1-f0d0-4888-ae0b-1c5e1febdafb";
 
       const data = {
         gfLang: this.language.substring(0, 2),
@@ -77,5 +77,5 @@ export class AuthClient {
         }
       });
     });
-  };
+  }
 }
