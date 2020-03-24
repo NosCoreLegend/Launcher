@@ -84,6 +84,7 @@ export class LeftPanel extends React.Component<AuthInformation, {}> {
           if (err) {
             return console.log(err);
           }
+          console.log(`${executablePath} generated!`);
           fs.copyFile(
             configuration?.apidll,
             (configuration?.client.substring(
@@ -94,6 +95,7 @@ export class LeftPanel extends React.Component<AuthInformation, {}> {
               if (err) {
                 return console.log(err);
               }
+              console.log('gameforge_client_api.dll copied!');
               require("child_process").execFile(executablePath, parameters);
             }
           );
