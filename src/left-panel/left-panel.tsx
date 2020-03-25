@@ -12,7 +12,7 @@ export class LeftPanel extends React.Component<AuthInformation, {}> {
     if (this.props.user === "") {
       return;
     }
-
+    console.log("start patching");
     const store = new Store();
     const configuration = store.get("user-configuration");
     const executablePath = `${configuration?.client.substring(
@@ -95,7 +95,7 @@ export class LeftPanel extends React.Component<AuthInformation, {}> {
               if (err) {
                 return console.log(err);
               }
-              console.log('gameforge_client_api.dll copied!');
+              console.log("gameforge_client_api.dll copied!");
               require("child_process").execFile(executablePath, parameters);
             }
           );
