@@ -28,7 +28,7 @@ export class LeftPanel extends React.Component<AuthInformation, {}> {
     fs.readFile(
       configuration?.client ?? `${nosDirectory}NostaleClientX.exe`,
       "binary",
-      function(err: any, data: any) {
+      async function(err: any, data: any) {
         if (err) {
           return console.log(err);
         }
@@ -80,12 +80,12 @@ export class LeftPanel extends React.Component<AuthInformation, {}> {
                 String.fromCharCode(ip.length)
             );
         }
-        fs.writeFile(executablePath, result, "binary", function(err: any) {
+        await fs.writeFile(executablePath, result, "binary", async function(err: any) {
           if (err) {
             return console.log(err);
           }
           console.log(`${executablePath} generated!`);
-          fs.copyFile(
+          await fs.copyFile(
             configuration?.apidll,
             (configuration?.client.substring(
               0,
