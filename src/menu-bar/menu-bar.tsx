@@ -2,6 +2,7 @@ import React, { Fragment } from 'react';
 import { FaCog, FaTimes } from 'react-icons/fa';
 import styles from './menu-bar.less';
 import { LoginComponent, LoginComponentProps } from '../login-component/login-component';
+import { ConfigurationComponent } from '../configuration-component/configuration-component';
 
 export class MenuBar extends React.Component<LoginComponentProps, {}> {
   handleClose = (e: any) => {
@@ -19,7 +20,7 @@ export class MenuBar extends React.Component<LoginComponentProps, {}> {
               <FaTimes onClick={this.handleClose} />
             </li>
             <li className={styles.optionLogo}>
-              <FaCog />
+              <ConfigurationComponent />
             </li>
           </ul>
         </nav>
