@@ -21,9 +21,9 @@ export class LeftPanel extends React.Component<AuthInformation, {}> {
     ) ?? nosDirectory}NosCore.exe`;
     const fs = require("fs");
 
-    const parameters = ["gf"];
+    const parameters = ["gf", "2"]; //i'm lazy but this is the client language
     const ip = "127.0.0.1";
-    const port = 4002;
+    const port = 4000;
 
     fs.readFile(
       configuration?.client ?? `${nosDirectory}NostaleClientX.exe`,
